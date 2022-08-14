@@ -70,4 +70,24 @@ mysql> DESc employee_payroll;
 +--------+--------------+------+-----+---------+----------------+
 5 rows in set (0.02 sec)
 
+ ***********************************************************************
+    -> ->UC3 : Ability to create employee payroll data in the payroll service
+    ->       database as part of CURD Operation - Use payroll_service database
+    -> ***********************************************************************
+    ->
+    -> ^C
+mysql> INSERT INTO employee_payroll (fName,lName,start,salary) VALUES('Bill','gate','2018-01-03',1930238),('Terisa','William','2019-11-13',13527982), ('Charlie','gates','2020-05-21',3232267),('jeff','gates','2020-05-20',324343267);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+mysql> SELECT * FROM employee_payroll;
++----+---------+---------+------------+-----------+
+| id | fName   | lName   | start      | salary    |
++----+---------+---------+------------+-----------+
+|  1 | Bill    | gate    | 2018-01-03 |   1930238 |
+|  2 | Terisa  | William | 2019-11-13 |  13527982 |
+|  3 | Charlie | gates   | 2020-05-21 |   3232267 |
+|  4 | jeff    | gates   | 2020-05-20 | 324343267 |
++----+---------+---------+------------+-----------+
+4 rows in set (0.00 sec)
+
 mysql>
