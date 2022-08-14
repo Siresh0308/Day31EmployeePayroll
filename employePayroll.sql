@@ -42,5 +42,32 @@ mysql> select database();
 | employeepayroll |
 +-----------------+
 1 row in set (0.00 sec)
+ **********************************************************************
+    ->     -> ->UC2 : Ability to create a employee payroll table in the payroll service
+    ->     ->       database to manage employee payrolls
+    ->     -> **********************************************************************
+    -> ^C
+mysql>
+mysql> create table employee_payroll ( id INT unsigned NOT NULL AUTO_INCREMENT, fName varchar(30), lName(30), start date , salary double,PRIMARY KEY  (id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(30), start date , salary double,PRIMARY KEY  (id))' at line 1
+mysql> create table employee_payroll ( id INT unsigned NOT NULL AUTO_INCREMENT, fName varchar(30), lName varchar(30), start date , salary double,PRIMARY KEY  (id));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> DESCRIBE employee_payroll
+    -> DESCRIBE employee_payroll;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESCRIBE employee_payroll' at line 2
+mysql> DES employee_payroll;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DES employee_payroll' at line 1
+mysql> DESc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| fName  | varchar(30)  | YES  |     | NULL    |                |
+| lName  | varchar(30)  | YES  |     | NULL    |                |
+| start  | date         | YES  |     | NULL    |                |
+| salary | double       | YES  |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+5 rows in set (0.02 sec)
 
 mysql>
