@@ -104,4 +104,40 @@ mysql> SELECT * FROM employee_payroll;
 |  4 | jeff    | gates   | 2020-05-20 | 324343267 |
 +----+---------+---------+------------+-----------+
 4 rows in set (0.00 sec)
+ *********************************************************************
+    UC5: Ability to retrieve salary data for a particular employee as
+    well as all employees who have joined in a particular data range
+    from the payroll service database
+ *********************************************************************
+    
+mysql> SELECT salary FROM employee_payroll WHERE name = 'Bill';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> SELECT salary FROM employee_payroll WHERE fname = 'Bill';
++---------+
+| salary  |
++---------+
+| 1930238 |
++---------+
+1 row in set (0.01 sec)
 
+mysql> SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2018-01-01' AS DATE) AND DATE(NOW());
++----+---------+---------+------------+-----------+
+| id | fName   | lName   | start      | salary    |
++----+---------+---------+------------+-----------+
+|  1 | Bill    | gate    | 2018-01-03 |   1930238 |
+|  2 | Terisa  | William | 2019-11-13 |  13527982 |
+|  3 | Charlie | gates   | 2020-05-21 |   3232267 |
+|  4 | jeff    | gates   | 2020-05-20 | 324343267 |
++----+---------+---------+------------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2020-01-01' AS DATE) AND DATE(NOW());
++----+---------+-------+------------+-----------+
+| id | fName   | lName | start      | salary    |
++----+---------+-------+------------+-----------+
+|  3 | Charlie | gates | 2020-05-21 |   3232267 |
+|  4 | jeff    | gates | 2020-05-20 | 324343267 |
++----+---------+-------+------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql>
