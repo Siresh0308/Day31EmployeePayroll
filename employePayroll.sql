@@ -231,3 +231,75 @@ mysql> SELECT * FROM employee_payroll;
 +----+---------+---------+--------+------------+-----------+
 4 rows in set (0.00 sec)
 
+ *****************************************************************
+ UC7: Ability to find sum, average, min, max and number of male
+       and female employees
+ *****************************************************************
+
+mysql> SELECT AVG(salary) FROM employee_payroll WHERE gender = 'Male' GROUP BY gender;
++--------------------+
+| AVG(salary)        |
++--------------------+
+| 109835257.33333333 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(salary) FROM employee_payroll GROUP BY gender;
++--------------------+
+| AVG(salary)        |
++--------------------+
+| 109835257.33333333 |
+|            3000000 |
++--------------------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT gender, COUNT(name) FROM employee_payroll GROUP BY gender;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> SELECT gender, COUNT(fname) FROM employee_payroll GROUP BY gender;
++--------+--------------+
+| gender | COUNT(fname) |
++--------+--------------+
+| male   |            3 |
+| Female |            1 |
++--------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT gender, SUM(salary) FROM employee_payroll GROUP BY gender;
++--------+-------------+
+| gender | SUM(salary) |
++--------+-------------+
+| male   |   329505772 |
+| Female |     3000000 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT gender, MIN(salary) FROM employee_payroll GROUP BY gender;
++--------+-------------+
+| gender | MIN(salary) |
++--------+-------------+
+| male   |     1930238 |
+| Female |     3000000 |
++--------+-------------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT gender, MAX(salary) FROM employee_payroll GROUP BY gender;
++--------+-------------+
+| gender | MAX(salary) |
++--------+-------------+
+| male   |   324343267 |
+| Female |     3000000 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> Desc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| fName  | varchar(30)  | YES  |     | NULL    |                |
+| lName  | varchar(30)  | YES  |     | NULL    |                |
+| gender | char(7)      | YES  |     | NULL    |                |
+| start  | date         | YES  |     | NULL    |                |
+| salary | double       | YES  |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+6 rows in set (0.50 sec)
