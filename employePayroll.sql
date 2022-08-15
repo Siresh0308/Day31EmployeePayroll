@@ -625,3 +625,78 @@ mysql> SELECT * FROM employee_payroll;
 |  5 | Terisa  | william | female | 2018-01-03 |   3000000 | 982582672 | Marketing  | Mumbai  |  3000000 |   4070000 |    1404070 |    500000 | 3800000 |
 +----+---------+---------+--------+------------+-----------+-----------+------------+---------+----------+-----------+------------+-----------+---------+
 5 rows in set (0.00 sec)
+********************************************************************************************************************************
+UC 10 And 11 : Ability to make Terissa as part of Sales and Marketing Department.
+
+********************************************************************************************************************************
+
+mysql> update employee_payroll set Department = 'Sales' WHERE id = '2';
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> CREATE TABLE Department ( department varchar(250) NOT NULL, PRIMARY KEY (department) );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO Department ( department ) VALUES ('Sales'),('Marketing');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Department;
++------------+
+| department |
++------------+
+| Marketing  |
+| Sales      |
++------------+
+2 rows in set (0.00 sec)
+
+mysql>  CREATE TABLE Employee ( id int, compID int, PhoneNumbe BIGINT(13), Address varchar(25), gender char(1),PRIMARY KEY (id) );
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> INSERT INTO Employee (id, compID, PhoneNumbe, Address, gender) VALUES ( 1, 10, 7775827779, 'Mubai', 'F'),(2, 11, 7775828889, 'Mumbai', 'M');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Employee;
++----+--------+------------+---------+--------+
+| id | compID | PhoneNumbe | Address | gender |
++----+--------+------------+---------+--------+
+|  1 |     10 | 7775827779 | Mubai   | F      |
+|  2 |     11 | 7775828889 | Mumbai  | M      |
++----+--------+------------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Emp_Department (empID int, Depart varchar(250) NOT NULL, FOREIGN KEY (empID) REFERENCES Employee (id),FOREIGN KEY (Depart) REFERENCES Department (department), PRIMARY KEY (empID, Depart));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> describe Emp_Department;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| empID  | int          | NO   | PRI | NULL    |       |
+| Depart | varchar(250) | NO   | PRI | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql>  INSERT INTO Emp_Department (empID, Depart) VALUES (1, 'Marketing');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (1, 'Sales');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (2, 'Sales');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (2, 'Marketing');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Emp_Department;
++-------+-----------+
+| empID | Depart    |
++-------+-----------+
+|     1 | Marketing |
+|     2 | Marketing |
+|     1 | Sales     |
+|     2 | Sales     |
++-------+-----------+
+4 rows in set (0.00 sec)
