@@ -303,3 +303,30 @@ mysql> Desc employee_payroll;
 | salary | double       | YES  |     | NULL    |                |
 +--------+--------------+------+-----+---------+----------------+
 6 rows in set (0.50 sec)
+****************************************************************************
+UC 8 : Ability to extend employee_payroll data to store employee information
+         like employee phone, address and department
+   ****************************************************************************
+mysql> ALTER TABLE employee_payroll ADD Phone int(13);^C
+mysql> ALTER TABLE employee_payroll ADD Phone int(13);
+Query OK, 0 rows affected, 1 warning (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> ALTER TABLE employee_payroll ADD Department varchar(250);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add address varchar(250);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+---------+--------+------------+-----------+-------+------------+---------+
+| id | fName   | lName   | gender | start      | salary    | Phone | Department | address |
++----+---------+---------+--------+------------+-----------+-------+------------+---------+
+|  1 | Bill    | gate    | male   | 2018-01-03 |   1930238 |  NULL | NULL       | NULL    |
+|  2 | Terisa  | William | Female | 2019-11-13 |   3000000 |  NULL | NULL       | NULL    |
+|  3 | Charlie | gates   | male   | 2020-05-21 |   3232267 |  NULL | NULL       | NULL    |
+|  4 | jeff    | gates   | male   | 2020-05-20 | 324343267 |  NULL | NULL       | NULL    |
++----+---------+---------+--------+------------+-----------+-------+------------+---------+
+4 rows in set (0.00 sec)
